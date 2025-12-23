@@ -47,7 +47,7 @@ Segui questi passaggi per configurare l'ambiente locale:
 1. **Clona il repository:**
 
 ```bash
-git clone [https://github.com/tuo-username/facility-manager.git](https://github.com/tuo-username/facility-manager.git)
+git clone https://github.com/CristianMessina/facility-manager.git
 cd facility-manager
 
 ```
