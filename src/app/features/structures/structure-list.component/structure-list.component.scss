@@ -178,8 +178,6 @@ textarea.input-field { min-height: 80px; resize: vertical; }
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr 1fr;
-    
-    // Su mobile, gli input vanno uno sotto l'altro
     @media (max-width: 600px) {
       grid-template-columns: 1fr;
     }
@@ -188,7 +186,7 @@ textarea.input-field { min-height: 80px; resize: vertical; }
 
 .grid-layout {
   display: grid;
-  // auto-fit con minmax permette di avere 1 colonna su mobile e più colonne su desktop automaticamente
+  // auto-fill con minmax permette di avere 1 colonna su mobile e più colonne su desktop automaticamente
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1rem;
 }

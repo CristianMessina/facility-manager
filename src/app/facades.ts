@@ -1,4 +1,3 @@
-// src/app/facades.ts
 import { Injectable, inject, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Structure, Space, Feature } from './core';
