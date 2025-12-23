@@ -1,0 +1,63 @@
+<div class="header-actions">
+  <h2>Catalogo Strutture</h2>
+  <button class="btn-primary" (click)="toggleForm()">
+    {{ showForm ? 'Annulla' : '+ Nuova Struttura' }}
+  </button>
+</div>
+
+@if (showForm) {
+  <form [formGroup]="form" (ngSubmit)="create()" class="creation-form">
+    <div class="form-group">
+      <input formControlName="name" placeholder="Nome Struttura" class="input-field" />
+      <div class="form-group address-container" (clickOutside)="addressSuggestions = []">
+        <input 
+          id="address"
+          type="text" 
+          formControlName="address" 
+          placeholder="Indirizzo sede" 
+          class="input-field"
+          autocomplete="off"
+          (focus)="onAddressFocus()"
+        />
+      @if (isSearching) {
+        <span class="loader-inline"></span>
+      }
+
+  @if (addressSuggestions.length > 0) {
+    <ul class="address-dropdown">
+      @for (suggestion of addressSuggestions; track suggestion.place_id) {
+        <li (click)="selectAddress(suggestion)" class="dropdown-item">
+          <span class="material-icons">location_on</span>
+          <div class="address-text">
+            <span class="main-name">{{ suggestion.display_name.split(',')[0] }}</span>
+            <span class="full-address">{{ suggestion.display_name }}</span>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+  </div>
+      <textarea formControlName="description" placeholder="Descrizione della struttura..." class="input-field"></textarea>
+    </div>
+    <button type="submit" [disabled]="form.invalid" class="btn-save">Salva</button>
+  </form>
+}
+
+<div class="grid-layout">
+  @for (str of facade.structures(); track str.id) {
+    <article class="card">
+      <div class="card-body">
+        <h3>{{ str.name }}</h3>
+        <p class="address">{{ str.address }}</p>
+      </div>
+      <div class="card-footer">
+        <a [routerLink]="['/structure', str.id]" class="btn-primary" style="text-decoration: none; padding: 6px 12px; font-size: 13px;">Gestisci</a>
+        <button (click)="delete(str.id)" class="btn-danger">Elimina</button>
+      </div>
+    </article>
+  } @empty {
+    <div class="empty-state">
+      <p>Nessuna struttura presente nel catalogo.</p>
+    </div>
+  }
+</div>

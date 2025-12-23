@@ -1,0 +1,69 @@
+<div class="container">
+  <header class="header">
+    <h2>Gestione Servizi & Dotazioni</h2>
+    <p class="subtitle">Definisci i servizi globali disponibili nelle tue strutture</p>
+  </header>
+
+  <section class="editor-section" [class.editing]="isEditing() !== null">
+    <div class="form-header">
+      <h3>{{ isEditing() ? 'Modifica Servizio' : 'Nuovo Servizio' }}</h3>
+      @if (isEditing()) {
+        <button (click)="cancelEdit()" class="btn-text">Annulla</button>
+      }
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="isEditing() ? saveEdit(isEditing()!) : create()" class="feature-form">
+      
+      <div class="icon-picker-control">
+        <label>Icona</label>
+        <div class="selected-icon-preview" (click)="showIconSelector = !showIconSelector">
+          <span class="material-icons">{{ form.value.icon }}</span>
+          <span class="label">Cambia</span>
+        </div>
+
+        @if (showIconSelector) {
+          <div class="icon-grid">
+            @for (icon of availableIcons; track icon) {
+              <button type="button" 
+                      class="icon-option" 
+                      [class.active]="icon === form.value.icon"
+                      (click)="selectIcon(icon)">
+                <span class="material-icons">{{ icon }}</span>
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="input-control">
+        <label>Nome Servizio</label>
+        <input formControlName="name" placeholder="Es. Wi-Fi Fibra" class="input-field" />
+      </div>
+
+      <button type="submit" [disabled]="form.invalid" class="btn-save">
+        {{ isEditing() ? 'Aggiorna' : 'Aggiungi' }}
+      </button>
+    </form>
+  </section>
+
+  <hr class="divider" />
+
+  <div class="features-grid">
+    @for (feat of facade.features(); track feat.id) {
+      <div class="feature-card" [class.active-edit]="isEditing() === feat.id">
+        <div class="icon-circle">
+          <span class="material-icons">{{ feat.icon }}</span>
+        </div>
+        <div class="info">
+          <h4>{{ feat.name }}</h4>
+        </div>
+        <div class="actions">
+          <button (click)="startEdit(feat)" class="btn-icon edit" title="Modifica">✏️</button>
+          <button (click)="delete(feat.id)" class="btn-icon delete" title="Elimina">🗑️</button>
+        </div>
+      </div>
+    } @empty {
+      <div class="empty-state">Nessun servizio definito.</div>
+    }
+  </div>
+</div>

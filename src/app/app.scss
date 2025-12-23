@@ -1,0 +1,153 @@
+.app-shell {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.sidenav {
+  width: 260px;
+  background-color: #1a202c;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+
+  .brand-area {
+    padding: 20px;
+    background-color: #171923;
+    h1 { margin: 0; font-size: 1.25rem; }
+  }
+
+  nav {
+    padding: 20px 0;
+    
+    a {
+      display: block;
+      padding: 12px 20px;
+      color: #a0aec0;
+      text-decoration: none;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+
+      &:hover {
+        background-color: #2d3748;
+        color: white;
+      }
+
+      &.active {
+        background-color: #2d3748;
+        color: #63b3ed;
+        border-left-color: #63b3ed;
+      }
+      
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+/* Spinner */
+.loading-overlay {
+  position: fixed; inset: 0; background: rgba(255,255,255,0.7);
+  display: flex; align-items: center; justify-content: center; z-index: 9999;
+}
+.spinner {
+  width: 50px; height: 50px; border: 5px solid #e2e8f0; border-top-color: #3182ce;
+  border-radius: 50%; animation: spin 1s linear infinite;
+}
+
+/* Snackbar */
+.snackbar {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  padding: 12px 24px; border-radius: 8px; color: white; font-weight: 500;
+  z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  animation: slideUp 0.3s ease-out;
+  &.success { background: #48bb78; }
+  &.error { background: #f56565; }
+  &.info { background: #4299e1; }
+}
+
+/* Dialog */
+.dialog-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center; z-index: 9000;
+}
+.dialog-card {
+  background: white; padding: 2rem; border-radius: 12px; max-width: 400px; width: 90%;
+  h3 { margin-top: 0; }
+  .dialog-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem; }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes slideUp { from { transform: translate(-50%, 100%); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+
+.main-content {
+  flex: 1;
+  background-color: #f7fafc;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+.app-shell {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.mobile-header {
+  display: none; // Nascosto su desktop
+  background: #1a202c;
+  color: white;
+  padding: 1rem;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.menu-close-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; }
+
+@media (max-width: 768px) {
+  .mobile-header { display: flex; }
+
+  .sidenav {
+    position: fixed;
+    left: -260px; // Nascosta a sinistra
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    
+    .brand-area { display: flex; justify-content: space-between; align-items: center; }
+    .menu-close-btn { display: block; }
+  }
+
+  .menu-open .sidenav { left: 0; }
+  
+  .menu-open .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+  }
+
+  .main-content { padding: 1rem; }
+}
+
+.dialog-card {
+  width: 95%; // Quasi tutta la larghezza su mobile
+  max-width: 450px; // Limite su desktop
+  padding: 1.5rem;
+}
+
+.snackbar {
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  bottom: 10px;
+}

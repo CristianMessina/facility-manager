@@ -1,0 +1,181 @@
+/* Assicurati di importare i Material Icons nel index.html se non ci sono */
+/* <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 2rem;
+  h2 { margin: 0; color: #2d3748; }
+  .subtitle { color: #718096; margin-top: 0.5rem; }
+}
+
+.editor-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  border-left: 4px solid #4299e1; // Blue per create
+
+  &.editing {
+    border-left-color: #ed8936; // Orange per edit
+    background-color: #fffaf0;
+  }
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  h3 { margin: 0; font-size: 1.1rem; }
+}
+
+.feature-form {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+
+  @media(max-width: 600px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Icon Picker Styling */
+.icon-picker-control {
+  position: relative;
+  label { display: block; font-size: 0.85rem; color: #718096; margin-bottom: 4px; }
+}
+
+.selected-icon-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+  background: white;
+  &:hover { background: #f7fafc; }
+  .label { font-size: 0.8rem; color: #4299e1; }
+}
+
+.icon-grid {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  background: white;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 8px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  width: 220px;
+}
+
+.icon-option {
+  background: none;
+  border: 1px solid transparent;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover { background: #edf2f7; }
+  &.active { background: #ebf8ff; border-color: #4299e1; color: #3182ce; }
+}
+
+/* Input e Bottoni */
+.input-control {
+  flex: 1;
+  label { display: block; font-size: 0.85rem; color: #718096; margin-bottom: 4px; }
+  .input-field { width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; }
+}
+
+.btn-save {
+  padding: 10px 24px;
+  background: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 42px; // match input height
+  &:hover { background: #2b6cb0; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+.btn-text { background: none; border: none; color: #718096; cursor: pointer; text-decoration: underline; }
+
+/* Grid Cards */
+.divider { border: 0; border-top: 1px solid #edf2f7; margin: 2rem 0; }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.feature-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.2s;
+
+  &.active-edit { border-color: #ed8936; box-shadow: 0 0 0 2px rgba(237,137,54,0.2); }
+
+  .icon-circle {
+    width: 40px;
+    height: 40px;
+    background: #edf2f7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4a5568;
+  }
+
+  .info { flex: 1; h4 { margin: 0; font-size: 1rem; } }
+
+  .actions {
+    display: flex;
+    gap: 4px;
+    .btn-icon {
+      padding: 4px;
+      font-size: 1rem;
+      &:hover { background: #edf2f7; border-radius: 4px; }
+    }
+  }
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr; // Una sola feature per riga
+  }
+}
+
+.feature-form {
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    .btn-save { width: 100%; }
+  }
+}

@@ -1,0 +1,183 @@
+.detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.detail-header {
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 1rem;
+  
+  h1 { margin: 0; font-size: 2rem; color: #2d3748; }
+  .subtitle { color: #718096; margin: 0.5rem 0 0; }
+}
+
+.content-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  
+  @media(max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mappa */
+.map-container {
+  height: 300px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #cbd5e0;
+  z-index: 1; /* Importante per Leaflet */
+}
+
+.description-box {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+}
+
+/* Pannello Destro */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.space-form {
+  background: #f7fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px dashed #cbd5e0;
+
+  .form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .select-features {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+}
+
+.space-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.space-item {
+  padding: 1rem;
+  border-bottom: 1px solid #edf2f7;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &:last-child { border-bottom: none; }
+
+  .space-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .capacity-tag {
+    font-size: 0.85rem;
+    color: #4a5568;
+  }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .badge {
+    background: #ebf4ff;
+    color: #4299e1;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+}
+
+.delete-icon {
+  color: #e53e3e;
+  opacity: 0.7;
+  &:hover { opacity: 1; }
+}
+
+.top-nav {
+  margin-bottom: 1rem;
+  .btn-back {
+    background: none;
+    border: none;
+    color: #3182ce;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    &:hover { text-decoration: underline; }
+  }
+}
+
+.box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: #3182ce;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.content-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr; // Colonna singola per tablet e mobile
+    gap: 1.5rem;
+  }
+}
+
+.map-container {
+  height: 300px;
+  
+  @media (max-width: 600px) {
+    height: 200px; // Mappa più piccola su smartphone per risparmiare spazio
+  }
+}
+
+.detail-header h1 {
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+  }
+}
+
+// Rendiamo il form degli spazi più compatto su mobile
+.space-form .form-row {
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,80 @@
+@if (facade.selectedStructure(); as str) {
+  <div class="detail-container">
+    <div class="top-nav">
+      <button class="btn-back" (click)="goBack()">← Torna alla lista</button>
+    </div>
+    <header class="detail-header">
+      <h1>{{ str.name }}</h1>
+      <p class="subtitle">{{ str.address }}</p>
+    </header>
+
+    <div class="content-split">
+      
+      <aside class="left-panel">
+         <div id="map" class="map-container"></div>
+         <div class="description-box">
+           <div class="box-header">
+             <h3>Descrizione</h3>
+             <button class="btn-text" (click)="toggleEdit()">{{ isEditingDescription ? 'Annulla' : 'Modifica' }}</button>
+           </div>
+
+           @if (!isEditingDescription) {
+             <p>{{ str.description }}</p>
+           } @else {
+             <form [formGroup]="editForm" (ngSubmit)="saveDescription()">
+               <textarea formControlName="description" class="input-field"></textarea>
+               <button type="submit" class="btn-save btn-sm">Salva Modifiche</button>
+             </form>
+           }
+         </div>
+      </aside>
+
+      <section class="right-panel">
+        <div class="panel-header">
+          <h3>Spazi disponibili ({{ facade.currentStructureSpaces().length }})</h3>
+          <button (click)="toggleSpaceForm()" class="btn-primary">
+            {{ showSpaceForm ? 'Chiudi' : '+ Aggiungi Spazio' }}
+          </button>
+        </div>
+
+        @if (showSpaceForm) {
+          <form [formGroup]="spaceForm" (ngSubmit)="addSpace(str.id)" class="space-form">
+            <div class="form-row">
+              <input formControlName="name" placeholder="Nome Sala" class="input-field" />
+              <input type="number" formControlName="capacity" placeholder="Capienza" class="input-field" />
+            </div>
+            
+            <label class="label-features">Dotazioni & Servizi:</label>
+            <select multiple formControlName="featureIds" class="select-features">
+              @for (feat of facade.features(); track feat.id) {
+                <option [value]="feat.id">{{ feat.name }}</option>
+              }
+            </select>
+            <button type="submit" [disabled]="spaceForm.invalid" class="btn-save full-width">Salva Spazio</button>
+          </form>
+        }
+
+        <ul class="space-list">
+          @for (space of facade.currentStructureSpaces(); track space.id) {
+            <li class="space-item">
+              <div class="space-info">
+                <strong>{{ space.name }}</strong> 
+                <span class="capacity-tag">👤 {{ space.capacity }}</span>
+                <div class="badges">
+                  @for (fid of space.featureIds; track fid) {
+                    <span class="badge">{{ getFeatureName(fid) }}</span>
+                  }
+                </div>
+              </div>
+              <button (click)="deleteSpace(space.id)" class="btn-icon delete-icon" title="Rimuovi">🗑️</button>
+            </li>
+          } @empty {
+            <li class="empty-list">Nessuno spazio configurato per questa struttura.</li>
+          }
+        </ul>
+      </section>
+    </div>
+  </div>
+} @else {
+  <div class="loading">Caricamento struttura...</div>
+}
